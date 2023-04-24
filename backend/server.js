@@ -1,10 +1,19 @@
 const express = require('express');
 const fs = require('fs');
-const app = express();
+const bodyParser = require('body-parser');
+const cors = require('cors');
 const PORT = process.env.PORT || 3001;
+
+
+const app = express();
+
+app.use(cors())
 
 // Use JSON middleware to parse incoming request
 app.use(express.json());
+
+//Set up middleware to handle JSON data
+// app.use(bodyParser.json());
 
 // Favourites list to hold items
 let favourites = [];
