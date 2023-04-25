@@ -5,9 +5,10 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
-import Button from '@mui/material/Button';
 import CircularProgress from '@mui/material/CircularProgress';
-import logo from '../images/itunes_logo.png'
+import SearchIcon from '@mui/icons-material/Search';
+import logo from '../images/itunes-logo-bg.png'
+import { IconButton } from '@mui/material';
 
 
 export default function SearchBar() {
@@ -33,7 +34,7 @@ export default function SearchBar() {
 
     return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
-            <img src={logo} alt="iTunes Logo" style={{ width: '150px' }}/>
+            <img src={logo} alt="iTunes Logo" className='itunes-logo' />
 
             <form onSubmit={handleSubmit}>
                 <TextField
@@ -42,6 +43,7 @@ export default function SearchBar() {
                     onChange={(e) => setTerm(e.target.value)}
                     variant="outlined"
                     style={{ marginRight: '10px' }}
+                    required
                 />
 
                 <FormControl style={{ minWidth: '120px', marginRight: '10px' }}>
@@ -65,11 +67,13 @@ export default function SearchBar() {
                     </Select>
                 </FormControl>
 
-                <Button type="submit" variant="contained" color="primary" style={{ marginTop: '10px', marginRight: '30px' }}>
-                    Search
-                </Button>
+                <IconButton type="submit" color="primary" aria-label="search" style={{ marginTop: '10px', marginRight: '30px' }}>
+                    <SearchIcon />
+                </IconButton>
 
-                {loading && <CircularProgress />} {/* Conditional rendering of CircularProgress */}
+                {loading && <CircularProgress 
+                    style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translate(-50%, -50%)' }}
+                />} {/* Conditional rendering of CircularProgress */}
             </form>
         </div>
     )

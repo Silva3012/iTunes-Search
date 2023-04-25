@@ -1,0 +1,23 @@
+.App {
+  background: linear-gradient(178deg,#ffffff,#555555);
+  background-size: 120% 120%;
+  animation: gradient-animation 18s ease infinite;
+  background-repeat: cover;
+}
+
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.itunes-logo {
+  width: 250px;
+  padding-bottom: 10px;
+}

@@ -19,6 +19,12 @@ const StyledToolbar = styled(Toolbar)({
 const StyledLink = styled(Link)({
   color: '#333',
   textDecoration: 'none',
+  '&:hover': {
+    color: '#555555',
+  },
+  '&:active': {
+    color: '#3881C0', /* change the color to red when the link is clicked */
+  },
 });
 
 export default function NavBar() {
