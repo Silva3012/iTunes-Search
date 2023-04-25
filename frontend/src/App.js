@@ -1,14 +1,15 @@
-import './App.css';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; 
 import SearchBar from './components/SearchBar';
 import Results from './components/Results';
 import Favourites from './components/Favourites';
 import NavBar from './components/NavBar';
-
+import { Container } from '@mui/material';
+import './App.css';
 
 export default function App() {
   return (
-    <div className="App">
+    <Container className="App" maxWidth='lg'>
       <Router>
         <NavBar />
         <Routes>
@@ -17,7 +18,7 @@ export default function App() {
           <Route path='/favourites' element={<Favourites />} />
         </Routes>
       </Router>
-    </div>
+    </Container>
   );
 }
 

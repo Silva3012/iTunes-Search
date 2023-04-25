@@ -1,22 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
-import { Button, Card, CardContent, CardMedia, Typography } from '@mui/material';
+import { List, ListItem, ListItemText, ListItemAvatar, Avatar, IconButton, Typography } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 
-const StyledCard = styled(Card)({
+const StyledListItem = styled(ListItem)({
   maxWidth: 345,
   margin: '10px',
 });
 
-const StyledCardMedia = styled(CardMedia)({
+const StyledAvatar = styled(Avatar)({
   height: 140,
-  width: '100%',
+  width: 140,
 });
 
-const StyledCardContent = styled(CardContent)({
+const ListWrapper = styled('div')({
   display: 'flex',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
 });
 
+const ListItemWrapper = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  '& .MuiListItemText-root': {
+    marginLeft: '16px',
+  },
+});
 
 export default function Favourites() {
     // State to store the list of favourites
@@ -63,32 +71,33 @@ export default function Favourites() {
     };
 
     return (
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-        {favourites.length > 0 ? (
-            favourites.map((fav) => (
-            <StyledCard key={fav.trackId}>
-            <StyledCardMedia
-              image={fav.artworkUrl100}
-              title={fav.trackName}
-            />
-            <StyledCardContent>
-              <Typography gutterBottom variant="h5" component="h2">
-                {fav.trackName}
-              </Typography>
-              <Button onClick={() => handleRemoveFromFavourites(fav)} variant="contained">
-                Remove
-              </Button>
-            </StyledCardContent>
-            <Typography variant="body2" color="text.secondary">
-              {fav.artistName}
-            </Typography>
-            </StyledCard>
-        ))
-        ) : (
-            <Typography variant="body2" color="text.secondary">
-                No Favourites yet.
-            </Typography>
-        )}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <Typography variant="h4" component="h4" color="text.secondary" align='center'>
+            Favourites
+        </Typography>
+        <ListWrapper>
+            {favourites.length > 0 ? (
+                <List>
+                      {favourites.map((fav) => (
+                            <StyledListItem>
+                            <ListItemWrapper>
+                                <ListItemAvatar>
+                                    <StyledAvatar src={fav.artworkUrl100} alt={fav.trackName} />
+                                </ListItemAvatar>
+                                        <ListItemText primary={fav.trackName} secondary={fav.artistName} />
+                                </ListItemWrapper>
+                                <IconButton onClick={() => handleRemoveFromFavourites(fav)} aria-label="delete">
+                                    <DeleteIcon />
+                                </IconButton>
+                            </StyledListItem>
+                        ))}
+                </List>
+            ) : (
+                <Typography variant="body2" color="text.secondary">
+                    No Favourites yet.
+                </Typography>
+            )}
+        </ListWrapper>
         </div>
     );
 }

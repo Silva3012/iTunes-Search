@@ -2,6 +2,8 @@ import React from 'react';
 import { AppBar, Toolbar, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { Link } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const StyledAppBar = styled(AppBar)({
   background: '#fff',
@@ -10,7 +12,8 @@ const StyledAppBar = styled(AppBar)({
 
 const StyledToolbar = styled(Toolbar)({
   display: 'flex',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
+  gap: '20px',
 });
 
 const StyledLink = styled(Link)({
@@ -23,10 +26,14 @@ export default function NavBar() {
     <StyledAppBar position="static">
       <StyledToolbar>
         <Typography variant="h6">
-          <StyledLink to="/">Home</StyledLink>
+          <StyledLink to="/">
+            <HomeIcon />
+          </StyledLink>
         </Typography>
         <Typography variant="h6">
-          <StyledLink to="/favourites">Favourites</StyledLink>
+          <StyledLink to="/favourites">
+            <FavoriteIcon />
+          </StyledLink>
         </Typography>
       </StyledToolbar>
     </StyledAppBar>
