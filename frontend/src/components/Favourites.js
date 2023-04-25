@@ -33,7 +33,7 @@ export default function Favourites() {
     // Function to fetch the favourites list from the server
     const fetchFavourites = async () => {
         try {
-            const response = await fetch('http://localhost:3001/favourites');
+            const response = await fetch('https://itunes-search.onrender.com/favourites');
             const data = await response.json();
             console.log(data); // add this line
             setFavourites(data);
@@ -51,7 +51,7 @@ export default function Favourites() {
     const handleRemoveFromFavourites = async (item) => {
         try {
             // Send a DELETE request to the server to remove the item from the favourites list
-            const response = await fetch(`http://localhost:3001/favourites/${item.trackId}`, {
+            const response = await fetch(`https://itunes-search.onrender.com/favourites/${item.trackId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json', 

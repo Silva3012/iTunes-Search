@@ -30,7 +30,7 @@ export default function Results(props) {
             }
 
             // Send a POST request to the server to add the item to the favourites list
-            const response = await fetch('http://localhost:3001/favourites/add', {
+            const response = await fetch('https://itunes-search.onrender.com/favourites/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

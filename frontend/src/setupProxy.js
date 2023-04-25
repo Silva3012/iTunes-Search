@@ -7,7 +7,7 @@ module.exports = function(app) {
     // Forward requests that match the '/api' path to the Express server
     app.use(
         '/api', createProxyMiddleware({
-            target: 'http://localhost:3001/',
+            target: 'https://itunes-search.onrender.com/',
             changeOrigin: true
         })
     );

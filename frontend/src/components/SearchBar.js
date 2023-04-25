@@ -22,7 +22,7 @@ export default function SearchBar() {
 
         setLoading(true); // Set loading state to true
         // Send a GET request to the backend search route
-        const response = await fetch(`http://localhost:3001/search?term=${term}&mediaType=${mediaType}`);
+        const response = await fetch(`https://itunes-search.onrender.com/search?term=${term}&mediaType=${mediaType}`);
         const data = await response.json();
 
         setLoading(false); // Set loading state to false
