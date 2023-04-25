@@ -1,6 +1,5 @@
 const express = require('express');
 const helmet = require("helmet");
-const fs = require('fs');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const PORT = process.env.PORT || 3001;
@@ -8,29 +7,12 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 app.use(helmet());
-
 app.use(cors())
-
 // Use JSON middleware to parse incoming request
 app.use(express.json());
 
-//Set up middleware to handle JSON data
-// app.use(bodyParser.json());
-
 // Favourites list to hold items
 let favourites = [];
-
-// Check if favourites.json exists, and if so, read its contents and set favorites
-if (fs.existsSync('favourites.json')) {
-    favourites = JSON.parse(fs.readFileSync('favourites.json'));
-} else {
-    // Create favourites.json with an empty array if it doesn't exist
-    fs.writeFile('favourites.json', '[]', (err) => {
-        if (err) throw err;
-        console.log('favourites.json created');
-    });
-}
-
 
 app.get('/search', async (req, res) => {
     try {
@@ -63,13 +45,6 @@ app.post('/favourites/add', (req, res) => {
     
     // Add item to the favourites list
     favourites.push(item);
-    
-    // Write favourites to file
-    fs.writeFile('favourites.json', JSON.stringify(favourites), (err) => {
-        if (err) throw err;
-        console.log('Favourites written to file');
-    });
-
     // Send response back to client
     res.json({message: 'Item added to favourites list'});
 });
@@ -80,27 +55,12 @@ app.delete('/favourites/:trackId', (req, res) => {
 
     // Find index of the item in favourites list
     const index = favourites.findIndex(fav => fav.trackId === parseInt(trackId));
-
-    // console.log(`trackId: ${trackId}`);
-    // console.log(`index: ${index}`);
-    // console.log(`favourites: ${JSON.stringify(favourites)}`);
-
-    // console.log('trackId:', trackId);
-    // console.log('favourites:', favourites);
-
     // Check if the item exists in favourites list
     if (index === -1) {
         return res.status(404).json({ message: 'Item not found in favourites list'});
     }
     // Remove item from the favourites list
     favourites.splice(index, 1);
-
-     // Write favorites to file
-    fs.writeFile('favourites.json', JSON.stringify(favourites), (err) => {
-        if (err) throw err;
-        console.log('Favourites written to file');
-    });
-
     // Send response back to client
     res.json({ message: 'Item removed from favourites list'});
 });
